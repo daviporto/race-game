@@ -3,11 +3,10 @@ def get_absoluto(value):
 
 
 class Car:
-    def __init__(self, x, y, sprites, max_speed=250, aceleration=1):
+    def __init__(self, x, y, sprite, max_speed=250, aceleration=1):
         self.x = x
         self.y = y
-        self.sprites = sprites
-        self.current_sprite = sprites[0]
+        self.sprite = sprite
         self.max_speed = max_speed
         self.aceleration = aceleration
         self.speed = 0
@@ -15,15 +14,21 @@ class Car:
         self.direction = 0
 
     def draw(self, screen):
-        self.current_sprite.render(screen, self.x, self.y)
+        self.sprite.render(screen, self.x, self.y)
+
+    def collided(self, obj):
+        offset_x = self.x - obj.x
+        offset_y = self.y - obj.y
+        return self.sprite.mask.overlap(obj.sprite.mask, (offset_x, offset_y)) != None
 
     def update(self):
-        if self.direction:
-            if self.direction == 1:
-                self.x += 5
-            else:
-                self.x -= 5
-        self.direction = 0
+        if self.speed:
+            if self.direction:
+                if self.direction == 1:
+                    self.x += 5
+                else:
+                    self.x -= 5
+            self.direction = 0
 
     def get_speed(self):
         if not self.gas:

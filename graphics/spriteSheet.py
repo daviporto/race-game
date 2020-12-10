@@ -43,6 +43,3 @@ class SptriteSheet:
         return sprites
 
 
-if __name__ == "__main__":
-    sh = aaaa("res/cracters/Female 09-1.png")
-    sps = sh.getSprites()
