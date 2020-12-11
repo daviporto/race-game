@@ -6,15 +6,18 @@ class Player:
         self.score = 0
         self.lives = 4
         self.sprites = sprites
-        self.car = Car(200, 200, sprites[0])
+        self.car = Car(400, 200, sprites[0])
         self.current_sprite = 0
 
     def crash(self, enemy):
         if not enemy.collided:
             enemy.collided = True
+            enemy.count = 60
             self.lives -= 1
-            self.car.speed -= enemy.car.speed
-            enemy.car.speed = 0
+            if enemy.foward:
+                self.car.speed -= enemy.car.speed // 2
+            else:
+                self.car.speed = 0
 
     def draw(self, screen):
         self.car.draw(screen)

@@ -21,6 +21,11 @@ class Car:
         offset_y = self.y - obj.y
         return self.sprite.mask.overlap(obj.sprite.mask, (offset_x, offset_y)) != None
 
+    def too_close(self, y, obj):
+        offset_x = 100
+        offset_y = self.y - y
+        return self.sprite.mask.overlap(obj.sprite.mask, (offset_x, offset_y)) != None
+
     def update(self):
         if self.speed:
             if self.direction:
