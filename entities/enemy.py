@@ -42,15 +42,12 @@ class Enemy:
         self.car = Car(x, y, sprite, max_speed=150)
         self.foward = foward
         self.car.speed = random.randint(9, 12)
-        self.collided = False
         self.count = 0
 
     def update(self, speed, py, track_size):
-        if self.collided:
-            if self.count == 0:
-                self.collided = False
-            else:
-                self.count-=1
+        if self.count:
+            self.count -= 1
+            self.car.y -=speed
         else:
             if not self.foward:
                 self.car.y += self.car.speed - speed
