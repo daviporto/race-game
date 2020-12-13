@@ -1,4 +1,5 @@
 from entities.car import Car
+import pygame
 
 
 class Player:
@@ -35,3 +36,15 @@ class Player:
     def next_sprite(self):
         self.current_sprite += 1
         self.car.sprite = self.sprites[self.current_sprite]
+
+    def key_board(self, keys):
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            self.car.direction = -1
+        elif keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            self.car.direction = 1
+
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            self.car.gas = -1
+        elif keys[pygame.K_UP] or keys[pygame.K_w]:
+            self.car.gas = 1
+
